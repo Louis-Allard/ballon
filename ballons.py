@@ -1,19 +1,31 @@
 import pygame
 import time
+from random import *
 
 blue =  (1,126,207)
 white = (255,255,255)
+orange = (246,99,0)
 
 pygame.init()
 
 width = 800
 height = 500
 ballon_w = 50
-ballon_h = 50
+ballon_h = 55
+nuages_w = 500
+nuages_h = 237
 
 surface = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Ballons")
 img = pygame.image.load("./sprites/ballons.png")
+img_nuages01 = pygame.image.load("./sprites/nuages.png")
+img_nuages02 = pygame.image.load("./sprites/nuages2.png")
+
+def nuages(nuage_x,nuage_y,espace):
+    surface.blit(img_nuages01, (nuage_x, nuage_y))
+    surface.blit(img_nuages02, (nuage_x, nuage_y + nuages_h + espace))
+
+
 
 def rejoueOuQuit():
     for event in pygame.event.get([pygame.KEYDOWN, pygame.KEYUP,pygame.QUIT]):
@@ -26,7 +38,7 @@ def rejoueOuQuit():
     return None    
 
 def creaTexteObj(texte, Police):
-    texteSurface = Police.render(texte, True, white)
+    texteSurface = Police.render(texte, True, orange)
     return texteSurface, texteSurface.get_rect()
 
 def message(texte):
@@ -59,6 +71,11 @@ def main():
     move_y = 0
     game_over = False
     clock = pygame.time.Clock()
+    nuage_x = width
+    nuage_y = randint(-300,20)
+    espace = ballon_h * 2
+    nuages_vitesse = 6
+
     while not game_over:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -72,10 +89,24 @@ def main():
 
         surface.fill(blue)
         ballon(img_x,img_y,img)
+        nuages(nuage_x,nuage_y,espace)
+        nuage_x -= nuages_vitesse
 
         if img_y > height - 40 or img_y < -10:
             gameOver()
 
+        if img_x + ballon_w > nuage_x + 20:
+            if img_y < nuage_y + nuages_h - 20:
+                if img_x - ballon_w < nuage_x + nuages_w - 20:
+                    gameOver()
+        if img_x + ballon_w > nuage_x + 20:
+            if img_y + ballon_h > nuage_y + nuages_h + espace + 20:
+                if img_x - ballon_w < nuage_x + nuages_w - 20:
+                    gameOver()
+
+        if nuage_x < (-1 * nuages_w):
+            nuage_x = width
+            nuage_y = randint(-300,20)
         pygame.display.update()
         clock.tick(60)
 

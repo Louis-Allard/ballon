@@ -4,15 +4,16 @@ from random import *
 
 blue =  (1,126,207)
 white = (255,255,255)
+orange = (246,99,0)
 
 pygame.init()
 
 width = 800
 height = 500
 ballon_w = 50
-ballon_h = 50
-nuages_w = 200
-nuages_h = 95
+ballon_h = 55
+nuages_w = 500
+nuages_h = 237
 
 surface = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Ballons")
@@ -37,7 +38,7 @@ def rejoueOuQuit():
     return None    
 
 def creaTexteObj(texte, Police):
-    texteSurface = Police.render(texte, True, white)
+    texteSurface = Police.render(texte, True, orange)
     return texteSurface, texteSurface.get_rect()
 
 def message(texte):
@@ -94,13 +95,13 @@ def main():
         if img_y > height - 40 or img_y < -10:
             gameOver()
 
-        if img_x + ballon_w > nuage_x:
-            if img_y < nuage_y + nuages_h:
-                if img_x - ballon_w < nuage_x + nuages_w:
+        if img_x + ballon_w > nuage_x + 20:
+            if img_y < nuage_y + nuages_h - 20:
+                if img_x - ballon_w < nuage_x + nuages_w - 20:
                     gameOver()
-        if img_x + ballon_w > nuage_x:
-            if img_y + ballon_h > nuage_y + nuages_h + espace:
-                if img_x - ballon_w < nuage_x + nuages_w:
+        if img_x + ballon_w > nuage_x + 20:
+            if img_y + ballon_h > nuage_y + nuages_h + espace + 20:
+                if img_x - ballon_w < nuage_x + nuages_w - 20:
                     gameOver()
 
         if nuage_x < (-1 * nuages_w):

@@ -11,10 +11,8 @@ width = 800
 height = 500
 ballon_w = 50
 ballon_h = 50
-nuages_w = 150
-nuages_h = 71
-nuages2 = 150
-nuages2_h = 93
+nuages_w = 200
+nuages_h = 95
 
 surface = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Ballons")
@@ -95,6 +93,16 @@ def main():
 
         if img_y > height - 40 or img_y < -10:
             gameOver()
+
+        if img_x + ballon_w > nuage_x:
+            if img_y < nuage_y + nuages_h:
+                if img_x - ballon_w < nuage_x + nuages_w:
+                    gameOver()
+        if img_x + ballon_w > nuage_x:
+            if img_y + ballon_h > nuage_y + nuages_h + espace:
+                if img_x - ballon_w < nuage_x + nuages_w:
+                    gameOver()
+
         if nuage_x < (-1 * nuages_w):
             nuage_x = width
             nuage_y = randint(-300,20)

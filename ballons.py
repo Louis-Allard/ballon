@@ -83,7 +83,6 @@ def main():
     espace = ballon_h * 1.5
     nuages_vitesse = 7
     score_actuel = 0
-    surface.blit(bg,(0,0))
 
     while not game_over:
         for event in pygame.event.get():
@@ -97,6 +96,8 @@ def main():
         perso_posy += perso_movey
 
         #surface.fill(blue)
+        surface.blit(bg,rect)
+        surface.blit(bg,(0,0))
         ballon(perso_posx,perso_posy,img)
         nuages(nuage_x,nuage_y,espace)
         score(score_actuel)
@@ -141,7 +142,6 @@ def main():
         pygame.display.update()
         clock.tick(60)
 
-surface.blit(bg,rect)
 main()
 pygame.quit()
 quit()

@@ -59,7 +59,7 @@ def message(texte):
     pygame.display.update()
     time.sleep(2)
     while rejoueOuQuit() == None:
-        clock.tick(0)
+        clock.tick()
     main()    
 
 def gameOver():
@@ -75,9 +75,9 @@ def main():
     game_over = False
     clock = pygame.time.Clock()
     nuage_x = width
-    nuage_y = randint(-300,20)
-    espace = ballon_h * 2
-    nuages_vitesse = 6
+    nuage_y = randint(-291,20)
+    espace = ballon_h * 1.5
+    nuages_vitesse = 7
     score_actuel = 0
 
     while not game_over:
@@ -101,25 +101,34 @@ def main():
         if perso_posy > height - 40 or perso_posy < -10:
             gameOver()
 
-        if 3 <= score_actuel > 5:
-            nuages_vitesse = 7
-            espace = ballon_h*2.8
-        if score_actuel >5:
-            nuages_vitesse = 8
-            espace = ballon_h*2.7        
+        if 2 <= score_actuel > 4:
+            nuages_vitesse = 9
+            espace = ballon_h*1.4
+        if 5 <= score_actuel > 7:
+            nuages_vitesse = 10
+            espace = ballon_h*1.3     
+        if 8 <= score_actuel > 9:
+            nuages_vitesse = 11
+            espace = ballon_h*1.2 
+        if 10 <= score_actuel > 12:
+            nuages_vitesse = 12
+            espace = ballon_h*1.1 
+        if score_actuel > 12:
+            nuages_vitesse = 15
+            espace = ballon_h*1.1             
 
-        if perso_posx + ballon_w > nuage_x + 20:
-            if perso_posy < nuage_y + nuages_h - 20:
-                if perso_posx - ballon_w < nuage_x + nuages_w - 20:
+        if perso_posx + ballon_w > nuage_x + 50:
+            if perso_posy < nuage_y + nuages_h - 50:
+                if perso_posx - ballon_w < nuage_x + nuages_w - 50:
                     gameOver()
-        if perso_posx + ballon_w > nuage_x + 20:
-            if perso_posy + ballon_h > nuage_y + nuages_h + espace + 20:
-                if perso_posx - ballon_w < nuage_x + nuages_w - 20:
+        if perso_posx + ballon_w > nuage_x + 50:
+            if perso_posy + ballon_h > nuage_y + nuages_h + espace + 50:
+                if perso_posx - ballon_w < nuage_x + nuages_w - 50:
                     gameOver()
 
         if nuage_x < (-1 * nuages_w):
             nuage_x = width
-            nuage_y = randint(-300,20)
+            nuage_y = randint(-291,20)
 
         if nuage_x < (perso_posx - nuages_w) < nuage_x + nuages_vitesse:
             score_actuel += 1

@@ -8,18 +8,18 @@ orange = (246,99,0)
 
 pygame.init()
 
-width = 800
-height = 500
-ballon_w = 50
-ballon_h = 55
-nuages_w = 500
-nuages_h = 237
+width = 1450
+height = 700
+ballon_w = 122
+ballon_h = 291
+nuages_w = 480
+nuages_h = 250
 
 surface = pygame.display.set_mode((width,height))
-pygame.display.set_caption("Ballons")
-img = pygame.image.load("./sprites/ballons.png")
-img_nuages01 = pygame.image.load("./sprites/nuages.png")
-img_nuages02 = pygame.image.load("./sprites/nuages2.png")
+pygame.display.set_caption("Fly Away")
+img = pygame.image.load("./sprites/perso.png")
+img_nuages01 = pygame.image.load("./sprites/oiseaux.png")
+img_nuages02 = pygame.image.load("./sprites/oiseaux2.png")
 
 def score(compte):
     police = pygame.font.Font('BradBunR.ttf', 16)

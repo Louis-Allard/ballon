@@ -65,13 +65,13 @@ def message(texte):
 def gameOver():
     message("Boom!")
 
-def ballon(img_x,img_y,image):
-    surface.blit(image,(img_x,img_y))
+def ballon(perso_posx,perso_posy,image):
+    surface.blit(image,(perso_posx,perso_posy))
 
 def main():
-    img_x = 150
-    img_y = 200
-    move_y = 0
+    perso_posx = 150
+    perso_posy = 200
+    perso_movey = 0
     game_over = False
     clock = pygame.time.Clock()
     nuage_x = width
@@ -86,19 +86,19 @@ def main():
                 game_over = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    move_y = -5
+                    perso_movey = -5
             if event.type == pygame.KEYUP:
-                move_y = 5
-        img_y += move_y
+                perso_movey = 5
+        perso_posy += perso_movey
 
         surface.fill(blue)
-        ballon(img_x,img_y,img)
+        ballon(perso_posx,perso_posy,img)
         nuages(nuage_x,nuage_y,espace)
         score(score_actuel)
 
         nuage_x -= nuages_vitesse
 
-        if img_y > height - 40 or img_y < -10:
+        if perso_posy > height - 40 or perso_posy < -10:
             gameOver()
 
         if 3 <= score_actuel > 5:
@@ -108,20 +108,20 @@ def main():
             nuages_vitesse = 8
             espace = ballon_h*2.7        
 
-        if img_x + ballon_w > nuage_x + 20:
-            if img_y < nuage_y + nuages_h - 20:
-                if img_x - ballon_w < nuage_x + nuages_w - 20:
+        if perso_posx + ballon_w > nuage_x + 20:
+            if perso_posy < nuage_y + nuages_h - 20:
+                if perso_posx - ballon_w < nuage_x + nuages_w - 20:
                     gameOver()
-        if img_x + ballon_w > nuage_x + 20:
-            if img_y + ballon_h > nuage_y + nuages_h + espace + 20:
-                if img_x - ballon_w < nuage_x + nuages_w - 20:
+        if perso_posx + ballon_w > nuage_x + 20:
+            if perso_posy + ballon_h > nuage_y + nuages_h + espace + 20:
+                if perso_posx - ballon_w < nuage_x + nuages_w - 20:
                     gameOver()
 
         if nuage_x < (-1 * nuages_w):
             nuage_x = width
             nuage_y = randint(-300,20)
 
-        if nuage_x < (img_x - nuages_w) < nuage_x + nuages_vitesse:
+        if nuage_x < (perso_posx - nuages_w) < nuage_x + nuages_vitesse:
             score_actuel += 1
 
         pygame.display.update()

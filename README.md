@@ -9,4 +9,4 @@ Avoid the clouds and increase your score
 ***
  1. Clone
  2. install python3 and pygame
- 3. run and play
+ 3. click on up arrow and play

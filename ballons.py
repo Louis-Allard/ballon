@@ -87,7 +87,7 @@ def main():
     pnj_x = width
     pnj_y = randint(-291,20)
     espace = ballon_h * 1.5
-    espace_pnjs = pnj01_h * 2
+    espace_pnjs = pnj01_h * randint(2,5)
     nuages_vitesse = 7
     pnjs_vitesse = 12
     score_actuel = 0

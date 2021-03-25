@@ -54,7 +54,7 @@ def message(texte):
     pygame.display.update()
     time.sleep(2)
     while rejoueOuQuit() == None:
-        clock.tick()
+        clock.tick(0)
     main()    
 
 def gameOver():

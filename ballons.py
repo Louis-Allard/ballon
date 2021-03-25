@@ -20,6 +20,10 @@ pygame.display.set_caption("Fly Away")
 img = pygame.image.load("./sprites/perso.png")
 img_nuages01 = pygame.image.load("./sprites/oiseaux.png")
 img_nuages02 = pygame.image.load("./sprites/oiseaux2.png")
+bg = pygame.image.load("./sprites/ciel.png").convert()
+rect = bg.get_rect()
+
+
 
 def score(compte):
     police = pygame.font.Font('BradBunR.ttf', 20)
@@ -79,6 +83,7 @@ def main():
     espace = ballon_h * 1.5
     nuages_vitesse = 7
     score_actuel = 0
+    surface.blit(bg,(0,0))
 
     while not game_over:
         for event in pygame.event.get():
@@ -91,7 +96,7 @@ def main():
                 perso_movey = 5
         perso_posy += perso_movey
 
-        surface.fill(blue)
+        #surface.fill(blue)
         ballon(perso_posx,perso_posy,img)
         nuages(nuage_x,nuage_y,espace)
         score(score_actuel)
@@ -136,6 +141,7 @@ def main():
         pygame.display.update()
         clock.tick(60)
 
+surface.blit(bg,rect)
 main()
 pygame.quit()
 quit()

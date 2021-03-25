@@ -2,7 +2,6 @@ import pygame
 import time
 from random import *
 
-blue =  (20.6,42.4,67.5)
 white = (255,255,255)
 orange = (246,99,0)
 
@@ -14,16 +13,24 @@ ballon_w = 122
 ballon_h = 291
 nuages_w = 480
 nuages_h = 250
+pnj01_w = 100
+pnj01_h = 120
+pnj02_w = 56
+pnj02_h = 100
 
 surface = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Fly Away")
 img = pygame.image.load("./sprites/perso.png")
 img_nuages01 = pygame.image.load("./sprites/oiseaux.png")
 img_nuages02 = pygame.image.load("./sprites/oiseaux2.png")
+pnj01 = pygame.image.load("./sprites/pnj1.png")
+pnj02 = pygame.image.load("./sprites/pnj2.png")
 bg = pygame.image.load("./sprites/ciel.png").convert()
 rect = bg.get_rect()
 
-
+def pnjs(pnj_x,pnj_y,espace_pnjs):
+    surface.blit(pnj01,(pnj_x,pnj_y))
+    surface.blit(pnj02, (pnj_x, pnj_y + pnj01_h + espace_pnjs))
 
 def score(compte):
     police = pygame.font.Font('BradBunR.ttf', 20)
@@ -51,15 +58,12 @@ def creaTexteObj(texte, Police):
 def message(texte):
     GOtext= pygame.font.Font('BradBunR.ttf', 150)
     petitText = pygame.font.Font('BradBunR.ttf', 50)
-
     GOtextSurf, GOtextRect = creaTexteObj(texte,GOtext)
     GOtextRect.center = width/2, ((height/2)-50)
     surface.blit(GOtextSurf, GOtextRect)
-
     petitTextSurf, petitTextRect = creaTexteObj("Appuyez sur une touche pour continuer", petitText)
     petitTextRect.center = width/2, ((height/2)+50)
     surface.blit(petitTextSurf, petitTextRect)
-
     pygame.display.update()
     time.sleep(2)
     while rejoueOuQuit() == None:
@@ -80,10 +84,13 @@ def main():
     clock = pygame.time.Clock()
     nuage_x = width
     nuage_y = randint(-291,20)
+    pnj_x = width
+    pnj_y = randint(-291,20)
     espace = ballon_h * 1.5
+    espace_pnjs = pnj01_h * 2
     nuages_vitesse = 7
+    pnjs_vitesse = 20
     score_actuel = 0
-
     while not game_over:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -94,15 +101,15 @@ def main():
             if event.type == pygame.KEYUP:
                 perso_movey = 5
         perso_posy += perso_movey
-
-        #surface.fill(blue)
         surface.blit(bg,rect)
         surface.blit(bg,(0,0))
         ballon(perso_posx,perso_posy,img)
         nuages(nuage_x,nuage_y,espace)
+        pnjs(pnj_x,pnj_y,espace_pnjs)
         score(score_actuel)
 
         nuage_x -= nuages_vitesse
+        pnj_x -= pnjs_vitesse
 
         if perso_posy > height - 40 or perso_posy < -10:
             gameOver()

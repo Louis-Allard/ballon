@@ -22,7 +22,7 @@ img_nuages01 = pygame.image.load("./sprites/oiseaux.png")
 img_nuages02 = pygame.image.load("./sprites/oiseaux2.png")
 
 def score(compte):
-    police = pygame.font.Font('BradBunR.ttf', 16)
+    police = pygame.font.Font('BradBunR.ttf', 20)
     texte = police.render("Score: " + str(compte), True, white)
     surface.blit(texte, [10,0])
 
@@ -46,12 +46,12 @@ def creaTexteObj(texte, Police):
 
 def message(texte):
     GOtext= pygame.font.Font('BradBunR.ttf', 150)
-    petitText = pygame.font.Font('BradBunR.ttf', 20)
+    petitText = pygame.font.Font('BradBunR.ttf', 50)
 
     GOtextSurf, GOtextRect = creaTexteObj(texte,GOtext)
     GOtextRect.center = width/2, ((height/2)-50)
     surface.blit(GOtextSurf, GOtextRect)
-    
+
     petitTextSurf, petitTextRect = creaTexteObj("Appuyer sur une touche pour continuer", petitText)
     petitTextRect.center = width/2, ((height/2)+50)
     surface.blit(petitTextSurf, petitTextRect)
@@ -63,7 +63,7 @@ def message(texte):
     main()    
 
 def gameOver():
-    message("Boom!")
+    message("Boom !!!")
 
 def ballon(perso_posx,perso_posy,image):
     surface.blit(image,(perso_posx,perso_posy))

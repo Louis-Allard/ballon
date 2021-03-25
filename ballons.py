@@ -2,7 +2,7 @@ import pygame
 import time
 from random import *
 
-blue =  (1,126,207)
+blue =  (20.6,42.4,67.5)
 white = (255,255,255)
 orange = (246,99,0)
 
@@ -52,7 +52,7 @@ def message(texte):
     GOtextRect.center = width/2, ((height/2)-50)
     surface.blit(GOtextSurf, GOtextRect)
 
-    petitTextSurf, petitTextRect = creaTexteObj("Appuyer sur une touche pour continuer", petitText)
+    petitTextSurf, petitTextRect = creaTexteObj("Appuyez sur une touche pour continuer", petitText)
     petitTextRect.center = width/2, ((height/2)+50)
     surface.blit(petitTextSurf, petitTextRect)
 
